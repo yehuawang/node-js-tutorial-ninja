@@ -1,8 +1,12 @@
 const express = require('express');
 const morgan = require('morgan'); //morgan is a middleware that logs information about the request to the console
 
+
 // express app
 const app = express();
+
+// connect to mongodb
+const dbURI = 'mongodb+srv://cangyao:cangyao001719@node-js-cangyao-tuts.ukr5i.mongodb.net/?retryWrites=true&w=majority&appName=node-js-cangyao-tuts';
 
 
 // register view engine
