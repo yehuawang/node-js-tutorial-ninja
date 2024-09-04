@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Cangyao | <%= title %></title>
+</head>
+<body>
+
+    <% const name = 'Cangyao' %>
+    <nav>
+        <div class="site-title">
+            <a href="/"><h1>Blog Cangyao</h1></a>
+            <p><%= name %>'s blog site</p>
+        </div>
+        <ul>
+            <li><a href="/">Blogs</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/blogs/create">Create New Blog</a></li>
+        </ul>
+    </nav>
+
+    <div class="blogs content">
+        <h2>All Blogs</h2>
+
+        <% if (blogs.length > 0) { %>
+            <% blogs.forEach(blog => { %>
+
+                <h3 class="title"><%= blog.title %></h3>
+                <p class="snippet"><%= blog.snippet %></p> 
+
+            <% }) %>
+        <% } else { %>
+
+            <p>There are no blogs to display at the time...</p>
+
+        <% } %>
+    </div>
+</body>
+</html>
