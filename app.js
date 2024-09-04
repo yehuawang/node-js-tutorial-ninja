@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan'); //morgan is a middleware that logs information about the request to the console
 
 // express app
 const app = express();
@@ -12,6 +13,29 @@ app.set('view engine', 'ejs');
 
 // listen for requests
 app.listen(3000);
+
+
+
+
+// middleware
+// app.use((req, res, next) => {
+//     console.log('new request made:');
+//     console.log('host:', req.hostname);
+//     console.log('path', req.path);
+//     console.log('method', req.method);
+//     next(); //next() is a function that we call when we are done with the middleware and we want to move on to the next middleware
+// });
+
+// app.use((req, res, next) => {
+//     console.log('in the next middleware');
+//     next();
+// });
+
+
+// middleware & static files
+app.use(express.static('public')); //this will serve static files from the public folder
+app.use(morgan('dev'));
+
 
 app.get('/', (req, res) => {
     //res.send('<p>home page</p>');
