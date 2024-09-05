@@ -1,8 +1,7 @@
 const express = require('express');
 const morgan = require('morgan'); //morgan is a middleware that logs information about the request to the console
 const mongoose = require('mongoose'); //mongoose is a library that makes it easier to work with MongoDB
-const Blog = require('./models/blog');
-const { result } = require('lodash');
+const blogRoutes = require('./routes/blogRoutes');
 
 // express app
 const app = express();
@@ -36,66 +35,9 @@ app.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
 });
 
-app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create New Blog' });
-});
-
 
 // blog routes
-app.get('/blogs', (req, res) => {
-    Blog.find().sort({ createdAt: -1 }) //createdAt: -1 newest first
-        .then((result) => {
-            res.render('index', {
-                title: 'All Blogs',
-                blogs: result
-            })
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-// POST handler
-app.post('/blogs', (req, res) => {  
-    const blog = new Blog(req.body);
-    blog.save()
-        .then((result) => {
-            res.redirect('/blogs');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-});
-
-// GET specific blog
-app.get('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-    Blog.findById(id)
-        .then((result) => {
-            res.render('details', { blog: result, title: 'Blog Details' });
-        }) 
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-// DELETE request handler
-
-app.delete('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-
-    Blog.findByIdAndDelete(id)
-        .then(result => {
-            res.json({ redirect: '/blogs' });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-
-
-
+app.use('/blogs', blogRoutes); //scope the routes to the /blogs path, the blogRoutes.js does not need to use /blogs, instead can use / for /blogs...
 
 
 // 404 page
