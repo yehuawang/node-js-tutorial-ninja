@@ -70,8 +70,35 @@ h3{
 }
 
 /* index styles */
+.blogs a{
+    display: block;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 6px solid crimson;
+}
+.blogs a:hover h3{
+    color: crimson;
+}
+
 
 /* details styles */
+.details{
+    position: relative;
+}
+.delete{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: crimson;
+    color: white;
+}
+.delete:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.4);
+}
+
 
 /* create styles */
 .create-blog form{
